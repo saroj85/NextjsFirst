@@ -1,25 +1,31 @@
+import React, { Component } from 'react';
 import Fetch from 'isomorphic-unfetch';
 import Layout from '../components/Layout';
+import Users from '../components/Users';
 
-import Prices from '../components/Prices';
 
-const Index = (props) => (
-  <Layout>
-    <div>
-      <h1>Welcome to BitzPrice</h1>
-      <p>Check current Bitcoin rate</p>
-      <Prices bpi={props.bpi}/>
-    </div>
-  </Layout>
-);
 
-Index.getInitialProps = async function() {
-  const res = await fetch('https://api.coindesk.com/v1/bpi/currentprice.json');
-  const data = await res.json();
+export default class index extends Component {
+  static getInitialProps = async function () {
+    const res = await fetch('https://reqres.in/api/users?page=2');
+    const data = await res.json();
+    return { users: data.data};
+  }
 
-  return {
-    bpi: data.bpi
-  };
+  render() {
+    
+    console.log("this", this.props.users);
+
+
+    return (
+      <div>
+        <Layout>
+          <Users users={this.props.users}></Users>
+        </Layout>
+      </div>
+    )
+  }
 }
 
-export default Index;
+
+

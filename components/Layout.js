@@ -3,12 +3,13 @@ import Navbar from './Navbar';
 
 const Layout = (props) => (
   <div>
+    
     <Head>
-      <title>BitzPrice</title>
+      <title>{props.title}</title>
       <link rel="stylesheet" href="https://bootswatch.com/4/cerulean/bootstrap.min.css"/>
     </Head>
     <Navbar/>
-    <div className="container">
+   <div className="container">
       {props.children}
     </div>
   </div>
